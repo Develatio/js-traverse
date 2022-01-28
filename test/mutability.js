@@ -131,6 +131,54 @@ test('removeMap', function (t) {
     t.deepEqual(res, { a : 1, c : [ 3 ] });
 });
 
+test('remove proto', function (t) {
+    var obj = { a : 1, b : 2, c : [ 3, 4 ] };
+    traverse(obj).remove("c[1]");
+
+    t.assert(isEqual(
+        obj, { a : 1, b : 2, c : [ 3 ] }
+    ));
+
+    t.assert(!isEqual(
+        obj, { a : 1, b : 2, c : [ 3, undefined ] }
+    ));
+
+    t.assert(!isEqual(
+        obj, { a : 1, b : 2, c : [ 3, null ] }
+    ));
+
+    var obj = { a : 1, b : 2, b : 2, c : [ 3, 4 ] };
+    traverse(obj).remove("a");
+
+    t.assert(isEqual(
+        obj, { b : 2, c : [ 3, 4 ] }
+    ));
+});
+
+test('delete proto', function (t) {
+    var obj = { a : 1, b : 2, c : [ 3, 4 ] };
+    traverse(obj).delete("c[1]");
+
+    t.assert(isEqual(
+        obj, { a : 1, b : 2, c : [ 3, undefined ] }
+    ));
+
+    t.assert(!isEqual(
+        obj, { a : 1, b : 2, c : [ 3 ] }
+    ));
+
+    t.assert(!isEqual(
+        obj, { a : 1, b : 2, c : [ 3, null ] }
+    ));
+
+    var obj = { a : 1, b : 2, b : 2, c : [ 3, 4 ] };
+    traverse(obj).delete("a");
+
+    t.assert(isEqual(
+        obj, { b : 2, c : [ 3, 4 ] }
+    ));
+});
+
 test('delete', function (t) {
     var obj = { a : 1, b : 2, c : [ 3, 4 ] };
     traverse(obj).forEach(function (x) {

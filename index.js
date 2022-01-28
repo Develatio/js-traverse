@@ -47,6 +47,39 @@ Traverse.prototype.set = function (ps, value) {
     return value;
 };
 
+Traverse.prototype.delete = function (ps) {
+    var node = this.value;
+    ps = castPath(ps, node);
+    for (var i = 0; i < ps.length - 1; i ++) {
+        var key = ps[i];
+        if (!node || !hasOwnProperty.call(node, key)) {
+            return false;
+        }
+        node = node[key];
+    }
+    delete node[ps[i]];
+    return true;
+};
+
+Traverse.prototype.remove = function (ps) {
+    var node = this.value;
+    ps = castPath(ps, node);
+    for (var i = 0; i < ps.length - 1; i ++) {
+        var key = ps[i];
+        if (!node || !hasOwnProperty.call(node, key)) {
+            return false;
+        }
+        node = node[key];
+    }
+
+    if(Array.isArray(node)) {
+        node.splice(ps[i], 1);
+    } else {
+        delete node[ps[i]];
+        return true;
+    }
+};
+
 Traverse.prototype.map = function (cb) {
     return walk(this.value, cb, true);
 };
@@ -146,7 +179,7 @@ function walk (root, cb, immutable) {
                 if (stopHere) keepGoing = false;
             },
             remove : function (stopHere) {
-                if (isArray(state.parent.node)) {
+                if (Array.isArray(state.parent.node)) {
                     state.parent.node.splice(state.key, 1);
                 }
                 else {
@@ -235,7 +268,7 @@ function copy (src) {
     if (typeof src === 'object' && src !== null) {
         var dst;
 
-        if (isArray(src)) {
+        if (Array.isArray(src)) {
             dst = [];
         }
         else if (Buffer.isBuffer(src)) {
@@ -297,10 +330,6 @@ function isError (obj) { return toS(obj) === '[object Error]' }
 function isBoolean (obj) { return toS(obj) === '[object Boolean]' }
 function isNumber (obj) { return toS(obj) === '[object Number]' }
 function isString (obj) { return toS(obj) === '[object String]' }
-
-var isArray = Array.isArray || function isArray (xs) {
-    return Object.prototype.toString.call(xs) === '[object Array]';
-};
 
 var forEach = function (xs, fn) {
     if (xs.forEach) return xs.forEach(fn)

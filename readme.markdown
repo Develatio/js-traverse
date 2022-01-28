@@ -118,6 +118,16 @@ Get the element at the array or string `path`.
 
 Set the element at the array or string `path` to `value`.
 
+## .delete(path)
+
+Delete the element at the array or string `path`. This will call `delete` on whatever the end path is, which means that if the parent is an object,
+it's key will be removed. If it's an array, the element at that position will be set to `undefined`. If you want to remove elements from arrays use
+`.remove()`.
+
+## .remove(path)
+
+Like `.delete()`, but it will remove values from arrays, instead of setting them to `undefined`.
+
 ## .has(path)
 
 Return whether the element at the array or string `path` exists.
