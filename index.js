@@ -238,6 +238,9 @@ function copy (src) {
         if (isArray(src)) {
             dst = [];
         }
+        else if (Buffer.isBuffer(src)) {
+            dst = Buffer.from(src);
+        }
         else if (isDate(src)) {
             dst = new Date(src.getTime ? src.getTime() : src);
         }
