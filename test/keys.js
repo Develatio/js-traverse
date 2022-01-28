@@ -1,5 +1,5 @@
-var test = require('tape');
-var traverse = require('../');
+import test from 'ava';
+import traverse from '..';
 
 test('sort test', function (t) {
     var acc = [];
@@ -20,12 +20,10 @@ test('sort test', function (t) {
         }
         if (this.isLeaf) acc.push(node);
     });
-    
-    t.equal(
+
+    t.deepEqual(
         acc.join(' '),
         '9 30 22',
         'Traversal in a custom order'
     );
-    
-    t.end();
 });

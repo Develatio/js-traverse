@@ -1,10 +1,10 @@
-var test = require('tape');
-var traverse = require('../');
+import test from 'ava';
+import traverse from '..';
 
 test('interface map', function (t) {
     var obj = { a : [ 5,6,7 ], b : { c : [8] } };
-    
-    t.same(
+
+    t.deepEqual(
         traverse.paths(obj)
             .sort()
             .map(function (path) { return path.join('/') })
@@ -13,8 +13,8 @@ test('interface map', function (t) {
          ,
          'a a/0 a/1 a/2 b b/c b/c/0'
     );
-    
-    t.same(
+
+    t.deepEqual(
         traverse.nodes(obj),
         [
             { a: [ 5, 6, 7 ], b: { c: [ 8 ] } },
@@ -22,8 +22,8 @@ test('interface map', function (t) {
             { c: [ 8 ] }, [ 8 ], 8
         ]
     );
-    
-    t.same(
+
+    t.deepEqual(
         traverse.map(obj, function (node) {
             if (typeof node == 'number') {
                 return node + 1000;
@@ -34,10 +34,8 @@ test('interface map', function (t) {
         }),
         { a: '5 6 7', b: { c: '8' } }
     );
-    
+
     var nodes = 0;
     traverse.forEach(obj, function (node) { nodes ++ });
-    t.same(nodes, 8);
-    
-    t.end();
+    t.deepEqual(nodes, 8);
 });

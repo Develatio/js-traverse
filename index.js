@@ -1,3 +1,5 @@
+var castPath = require("lodash/_castPath");
+
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
 };
@@ -8,6 +10,7 @@ function Traverse (obj) {
 
 Traverse.prototype.get = function (ps) {
     var node = this.value;
+    ps = castPath(ps, node);
     for (var i = 0; i < ps.length; i ++) {
         var key = ps[i];
         if (!node || !hasOwnProperty.call(node, key)) {
@@ -21,6 +24,7 @@ Traverse.prototype.get = function (ps) {
 
 Traverse.prototype.has = function (ps) {
     var node = this.value;
+    ps = castPath(ps, node);
     for (var i = 0; i < ps.length; i ++) {
         var key = ps[i];
         if (!node || !hasOwnProperty.call(node, key)) {
@@ -33,6 +37,7 @@ Traverse.prototype.has = function (ps) {
 
 Traverse.prototype.set = function (ps, value) {
     var node = this.value;
+    ps = castPath(ps, node);
     for (var i = 0; i < ps.length - 1; i ++) {
         var key = ps[i];
         if (!hasOwnProperty.call(node, key)) node[key] = {};
@@ -65,7 +70,7 @@ Traverse.prototype.reduce = function (cb, init) {
 Traverse.prototype.paths = function () {
     var acc = [];
     this.forEach(function (x) {
-        acc.push(this.path); 
+        acc.push(this.path);
     });
     return acc;
 };
@@ -80,24 +85,24 @@ Traverse.prototype.nodes = function () {
 
 Traverse.prototype.clone = function () {
     var parents = [], nodes = [];
-    
+
     return (function clone (src) {
         for (var i = 0; i < parents.length; i++) {
             if (parents[i] === src) {
                 return nodes[i];
             }
         }
-        
+
         if (typeof src === 'object' && src !== null) {
             var dst = copy(src);
-            
+
             parents.push(src);
             nodes.push(dst);
-            
+
             forEach(objectKeys(src), function (key) {
                 dst[key] = clone(src[key]);
             });
-            
+
             parents.pop();
             nodes.pop();
             return dst;
@@ -112,13 +117,13 @@ function walk (root, cb, immutable) {
     var path = [];
     var parents = [];
     var alive = true;
-    
+
     return (function walker (node_) {
         var node = immutable ? copy(node_) : node_;
         var modifiers = {};
-        
+
         var keepGoing = true;
-        
+
         var state = {
             node : node,
             node_ : node_,
@@ -157,17 +162,17 @@ function walk (root, cb, immutable) {
             stop : function () { alive = false },
             block : function () { keepGoing = false }
         };
-        
+
         if (!alive) return state;
-        
+
         function updateState() {
             if (typeof state.node === 'object' && state.node !== null) {
                 if (!state.keys || state.node_ !== state.node) {
                     state.keys = objectKeys(state.node)
                 }
-                
+
                 state.isLeaf = state.keys.length == 0;
-                
+
                 for (var i = 0; i < parents.length; i++) {
                     if (parents[i].node_ === node_) {
                         state.circular = parents[i];
@@ -179,49 +184,49 @@ function walk (root, cb, immutable) {
                 state.isLeaf = true;
                 state.keys = null;
             }
-            
+
             state.notLeaf = !state.isLeaf;
             state.notRoot = !state.isRoot;
         }
-        
+
         updateState();
-        
+
         // use return values to update if defined
         var ret = cb.call(state, state.node);
         if (ret !== undefined && state.update) state.update(ret);
-        
+
         if (modifiers.before) modifiers.before.call(state, state.node);
-        
+
         if (!keepGoing) return state;
-        
+
         if (typeof state.node == 'object'
         && state.node !== null && !state.circular) {
             parents.push(state);
-            
+
             updateState();
-            
+
             forEach(state.keys, function (key, i) {
                 path.push(key);
-                
+
                 if (modifiers.pre) modifiers.pre.call(state, state.node[key], key);
-                
+
                 var child = walker(state.node[key]);
                 if (immutable && hasOwnProperty.call(state.node, key)) {
                     state.node[key] = child.node;
                 }
-                
+
                 child.isLast = i == state.keys.length - 1;
                 child.isFirst = i == 0;
-                
+
                 if (modifiers.post) modifiers.post.call(state, child);
-                
+
                 path.pop();
             });
             parents.pop();
         }
-        
+
         if (modifiers.after) modifiers.after.call(state, state.node);
-        
+
         return state;
     })(root).node;
 }
@@ -229,7 +234,7 @@ function walk (root, cb, immutable) {
 function copy (src) {
     if (typeof src === 'object' && src !== null) {
         var dst;
-        
+
         if (isArray(src)) {
             dst = [];
         }
@@ -267,7 +272,7 @@ function copy (src) {
             T.prototype = proto;
             dst = new T;
         }
-        
+
         forEach(objectKeys(src), function (key) {
             dst[key] = src[key];
         });

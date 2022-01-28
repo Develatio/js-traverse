@@ -1,5 +1,5 @@
-var traverse = require('../');
-var test = require('tape');
+import traverse from '..';
+import test from 'ava';
 
 test('subexpr', function (t) {
     var obj = [ 'a', 4, 'b', 5, 'c', 6 ];
@@ -8,14 +8,13 @@ test('subexpr', function (t) {
             this.update([ x - 0.1, x, x + 0.1 ], true);
         }
     });
-    
-    t.same(obj, [ 'a', 4, 'b', 5, 'c', 6 ]);
-    t.same(r, [
+
+    t.deepEqual(obj, [ 'a', 4, 'b', 5, 'c', 6 ]);
+    t.deepEqual(r, [
         'a', [ 3.9, 4, 4.1 ],
         'b', [ 4.9, 5, 5.1 ],
         'c', [ 5.9, 6, 6.1 ],
     ]);
-    t.end();
 });
 
 test('block', function (t) {
@@ -26,11 +25,10 @@ test('block', function (t) {
             else this.update([ [ x[0] + 1 ] ])
         }
     });
-    
-    t.same(r, [
+
+    t.deepEqual(r, [
         [ [ [ [ [ 5 ] ] ] ] ],
         [ [ [ [ 5 ] ] ] ],
         [ [ [ 5 ] ] ],
     ]);
-    t.end();
 });

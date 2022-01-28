@@ -1,5 +1,5 @@
-var test = require('tape');
-var traverse = require('../');
+import test from 'ava';
+import traverse from '..';
 
 test('leaves test', function (t) {
     var acc = [];
@@ -11,12 +11,10 @@ test('leaves test', function (t) {
     }).forEach(function (x) {
         if (this.isLeaf) acc.push(x);
     });
-    
-    t.equal(
+
+    t.deepEqual(
         acc.join(' '),
         '1 2 3 4 5 6 7 8 9',
         'Traversal in the right(?) order'
     );
-    
-    t.end();
 });

@@ -1,5 +1,5 @@
-var test = require('tape');
-var traverse = require('../');
+import test from 'ava';
+import traverse from '..';
 
 test('stop', function (t) {
     var visits = 0;
@@ -9,9 +9,8 @@ test('stop', function (t) {
             if (node === 'e') this.stop()
         }
     });
-    
-    t.equal(visits, 5);
-    t.end();
+
+    t.deepEqual(visits, 5);
 });
 
 test('stopMap', function (t) {
@@ -21,9 +20,8 @@ test('stopMap', function (t) {
             return node.toUpperCase();
         }
     }).join('');
-    
-    t.equal(s, 'ABCDEfghij');
-    t.end();
+
+    t.deepEqual(s, 'ABCDEfghij');
 });
 
 test('stopReduce', function (t) {
@@ -38,7 +36,6 @@ test('stopReduce', function (t) {
         }
         return acc;
     }, []);
-    
-    t.same(xs, [ 4, 5, 6 ]);
-    t.end();
+
+    t.deepEqual(xs, [ 4, 5, 6 ]);
 });
