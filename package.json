@@ -14,7 +14,7 @@
         "test": "ava"
     },
     "engines": {
-        "node": ">=6"
+        "node": ">=10"
     },
     "testling": {
         "files": "test/*.js",
