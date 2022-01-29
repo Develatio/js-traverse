@@ -2,10 +2,6 @@
 
 Traverse and transform objects by visiting every node on a recursive walk.
 
-[![browser support](http://ci.testling.com/substack/js-traverse.png)](http://ci.testling.com/substack/js-traverse)
-
-[![build status](https://secure.travis-ci.org/substack/js-traverse.png)](http://travis-ci.org/substack/js-traverse)
-
 # examples
 
 ## transform negative numbers in-place
@@ -212,8 +208,13 @@ Call this function after each of the children are traversed.
 
 Using [npm](http://npmjs.org) do:
 
-    $ npm install traverse
+    $ npm install traverse-v2
 
 # license
 
 MIT
+
+# credits
+
+This project was forked from https://github.com/substack/js-traverse
+Original author: James Halliday

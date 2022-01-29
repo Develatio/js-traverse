@@ -43,9 +43,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/Develatio/js-traverse.git"
+        "url": "git://github.com/Develatio/traverse-v2.git"
     },
-    "homepage": "https://github.com/Develatio/js-traverse",
+    "homepage": "https://github.com/Develatio/traverse-v2",
     "keywords": [
         "traverse",
         "walk",
@@ -56,9 +56,9 @@
         "clone"
     ],
     "author": {
-        "name": "James Halliday",
-        "email": "mail@substack.net",
-        "url": "http://substack.net"
+        "name": "Develatio",
+        "email": "contact@develat.io",
+        "url": "http://develat.io"
     },
     "license": "MIT",
     "dependencies": {
