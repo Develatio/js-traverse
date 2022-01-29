@@ -132,7 +132,7 @@ Traverse.prototype.clone = function () {
             parents.push(src);
             nodes.push(dst);
 
-            forEach(objectKeys(src), function (key) {
+            forEach(Object.keys(src), function (key) {
                 dst[key] = clone(src[key]);
             });
 
@@ -201,7 +201,7 @@ function walk (root, cb, immutable) {
         function updateState() {
             if (typeof state.node === 'object' && state.node !== null) {
                 if (!state.keys || state.node_ !== state.node) {
-                    state.keys = objectKeys(state.node)
+                    state.keys = Object.keys(state.node)
                 }
 
                 state.isLeaf = state.keys.length == 0;
@@ -312,19 +312,13 @@ function copy (src) {
             dst = new T;
         }
 
-        forEach(objectKeys(src), function (key) {
+        forEach(Object.keys(src), function (key) {
             dst[key] = src[key];
         });
         return dst;
     }
     else return src;
 }
-
-var objectKeys = Object.keys || function keys (obj) {
-    var res = [];
-    for (var key in obj) res.push(key)
-    return res;
-};
 
 function toS (obj) { return Object.prototype.toString.call(obj) }
 function isDate (obj) { return toS(obj) === '[object Date]' }
@@ -341,7 +335,7 @@ var forEach = function (xs, fn) {
     }
 };
 
-forEach(objectKeys(Traverse.prototype), function (key) {
+forEach(Object.keys(Traverse.prototype), function (key) {
     traverse[key] = function (obj) {
         var args = [].slice.call(arguments, 1);
         var t = new Traverse(obj);
