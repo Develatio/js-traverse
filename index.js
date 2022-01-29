@@ -242,9 +242,12 @@ function walk (root, cb, immutable) {
                 path.push(key);
 
                 if (modifiers.pre) modifiers.pre.call(state, state.node[key], key);
-
-                var child = walker(state.node[key]);
-                if (immutable && hasOwnProperty.call(state.node, key)) {
+                var child = walker(state.node ? state.node[key] : state.node);
+                if (immutable &&
+                    typeof state.node === 'object' &&
+                    state.node !== null &&
+                    hasOwnProperty.call(state.node, key)
+                ) {
                     state.node[key] = child.node;
                 }
 
