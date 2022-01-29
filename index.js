@@ -1,5 +1,6 @@
 var castPath = require("lodash/_castPath");
 var isDate = require("lodash/isDate");
+var isString = require("lodash/isString");
 
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
@@ -326,7 +327,6 @@ function isRegExp (obj) { return toS(obj) === '[object RegExp]' }
 function isError (obj) { return toS(obj) === '[object Error]' }
 function isBoolean (obj) { return toS(obj) === '[object Boolean]' }
 function isNumber (obj) { return toS(obj) === '[object Number]' }
-function isString (obj) { return toS(obj) === '[object String]' }
 
 var forEach = function (xs, fn) {
     if (xs.forEach) return xs.forEach(fn)
