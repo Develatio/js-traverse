@@ -1,4 +1,5 @@
 var castPath = require("lodash/_castPath");
+var isDate = require("lodash/isDate");
 
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
@@ -321,7 +322,6 @@ function copy (src) {
 }
 
 function toS (obj) { return Object.prototype.toString.call(obj) }
-function isDate (obj) { return toS(obj) === '[object Date]' }
 function isRegExp (obj) { return toS(obj) === '[object RegExp]' }
 function isError (obj) { return toS(obj) === '[object Error]' }
 function isBoolean (obj) { return toS(obj) === '[object Boolean]' }
