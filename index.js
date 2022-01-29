@@ -3,6 +3,7 @@ var isDate = require("lodash/isDate");
 var isString = require("lodash/isString");
 var isNumber = require("lodash/isNumber");
 var isBoolean = require("lodash/isBoolean");
+var isError = require("lodash/isError");
 
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
@@ -326,7 +327,6 @@ function copy (src) {
 
 function toS (obj) { return Object.prototype.toString.call(obj) }
 function isRegExp (obj) { return toS(obj) === '[object RegExp]' }
-function isError (obj) { return toS(obj) === '[object Error]' }
 
 var forEach = function (xs, fn) {
     if (xs.forEach) return xs.forEach(fn)
