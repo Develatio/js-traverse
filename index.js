@@ -326,8 +326,6 @@ function copy (src) {
     else return src;
 }
 
-function toS (obj) { return Object.prototype.toString.call(obj) }
-
 var forEach = function (xs, fn) {
     if (xs.forEach) return xs.forEach(fn)
     else for (var i = 0; i < xs.length; i++) {
