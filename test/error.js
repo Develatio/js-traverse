@@ -1,5 +1,5 @@
-import test from 'ava';
-import traverse from '..';
+var test = require('ava');
+var traverse = require('..');
 
 test('traverse an Error', function (t) {
     var obj = new Error("test");

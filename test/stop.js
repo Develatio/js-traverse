@@ -1,5 +1,5 @@
-import test from 'ava';
-import traverse from '..';
+var test = require('ava');
+var traverse = require('..');
 
 test('stop', function (t) {
     var visits = 0;

@@ -1,5 +1,5 @@
-import test from 'ava';
-import traverse from '..';
+var test = require('ava');
+var traverse = require('..');
 
 test('has', function (t) {
     var obj = { a : 2, b : [ 4, 5, { c : 6 } ] };

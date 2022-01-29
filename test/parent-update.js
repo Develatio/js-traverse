@@ -1,6 +1,6 @@
-import test from 'ava';
-import traverse from '..';
-import isEqual from 'lodash/isEqual';
+var test = require('ava');
+var traverse = require('..');
+var isEqual = require('lodash/isEqual');
 
 test('updating parent node with null value during map', function (t) {
     var obj = {

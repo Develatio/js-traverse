@@ -1,13 +1,16 @@
 var traverse = require(".");
 
 var obj = {
-    a : [1,2,3],
-    b : 4,
-    c : [5,6],
-    d : { e : [7,8], f : 9 },
-    z: {foo: "bar"},
-  };
+  name: {
+      en: null,
+      th: null,
+      zh: null
+  },
+  price: 100
+};
 
-const x = traverse(obj);
+const x = traverse(obj).map(function (item) {
+  console.log(this.key, "-->", item);
+});
 
-console.log(x);
+console.log(obj.c);

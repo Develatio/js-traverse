@@ -1,5 +1,5 @@
-import test from 'ava';
-import traverse from '..';
+var test = require('ava');
+var traverse = require('..');
 
 test('dateEach', function (t) {
     var obj = { x : new Date, y : 10, z : 5 };

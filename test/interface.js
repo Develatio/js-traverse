@@ -1,5 +1,5 @@
-import test from 'ava';
-import traverse from '..';
+var test = require('ava');
+var traverse = require('..');
 
 test('interface map', function (t) {
     var obj = { a : [ 5,6,7 ], b : { c : [8] } };

@@ -1,6 +1,6 @@
 {
-    "name": "traverse",
-    "version": "0.6.6",
+    "name": "traverse-v2",
+    "version": "2.0.0",
     "description": "traverse and transform objects by visiting every node on a recursive walk",
     "main": "index.js",
     "directories": {
@@ -8,7 +8,7 @@
         "test": "test"
     },
     "devDependencies": {
-        "ava": "^2.4.0"
+        "ava": "^4.0.0"
     },
     "scripts": {
         "test": "ava"
@@ -43,9 +43,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/substack/js-traverse.git"
+        "url": "git://github.com/Develatio/js-traverse.git"
     },
-    "homepage": "https://github.com/substack/js-traverse",
+    "homepage": "https://github.com/Develatio/js-traverse",
     "keywords": [
         "traverse",
         "walk",

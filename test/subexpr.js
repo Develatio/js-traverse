@@ -1,5 +1,5 @@
-import traverse from '..';
-import test from 'ava';
+var traverse = require('..');
+var test = require('ava');
 
 test('subexpr', function (t) {
     var obj = [ 'a', 4, 'b', 5, 'c', 6 ];

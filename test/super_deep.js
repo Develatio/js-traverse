@@ -1,5 +1,5 @@
-import test from 'ava';
-import isEqual from 'lodash/isEqual';
+var test = require('ava');
+var isEqual = require('lodash/isEqual');
 
 test('super_deep', function (t) {
     var a0 = make();

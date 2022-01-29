@@ -1,5 +1,5 @@
-import test from 'ava';
-import traverse from '..';
+var test = require('ava');
+var traverse = require('..');
 var EventEmitter = require('events').EventEmitter;
 
 test('check instanceof on node elems', function (t) {

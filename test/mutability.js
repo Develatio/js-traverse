@@ -1,6 +1,6 @@
-import test from 'ava';
-import traverse from '..';
-import isEqual from 'lodash/isEqual';
+var test = require('ava');
+var traverse = require('..');
+var isEqual = require('lodash/isEqual');
 
 test('mutate', function (t) {
     var obj = { a : 1, b : 2, c : [ 3, 4 ] };
